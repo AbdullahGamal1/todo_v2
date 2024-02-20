@@ -38,3 +38,24 @@ Widget DefaultFormField(
         return validate!(value!);
       },
     );
+
+Widget BuildTaskitem(Map model) => Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 40,
+            child: Text('${model['time']}'),
+          ),
+          SizedBox(width: 10),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('${model['title']}',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text('${model['date']}', style: TextStyle(color: Colors.grey)),
+            ],
+          ),
+        ],
+      ),
+    );
