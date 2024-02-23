@@ -32,7 +32,7 @@ class HomeLayout extends StatelessWidget {
                   Text(AppCubit.get(context).titlesNames[cubit.currentIndex]),
             ),
             body: ConditionalBuilder(
-              condition: State is! AppGetDataBaseLoadingState,
+              condition: state is! AppGetDataBaseLoadingState,
               builder: (context) => cubit.screens[cubit.currentIndex],
               fallback: (context) => Center(child: CircularProgressIndicator()),
             ),
@@ -139,7 +139,7 @@ class HomeLayout extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               currentIndex: cubit.currentIndex,
               onTap: (index) {
-                cubit.changeindex(index);
+                cubit.changeIndex(index);
               },
               items: [
                 BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Tasks'),
