@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_v2/shared/cubit/cubit.dart';
 
 typedef Myvalidator = String? Function(String);
 typedef MyOnTap = Function();
@@ -39,7 +40,7 @@ Widget DefaultFormField(
       },
     );
 
-Widget BuildTaskitem(Map model) => Padding(
+Widget BuildTaskitem(Map model, context) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
@@ -48,14 +49,34 @@ Widget BuildTaskitem(Map model) => Padding(
             child: Text('${model['time']}'),
           ),
           SizedBox(width: 10),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('${model['title']}',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Text('${model['date']}', style: TextStyle(color: Colors.grey)),
-            ],
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('${model['title']}',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text('${model['date']}', style: TextStyle(color: Colors.grey)),
+              ],
+            ),
           ),
+          SizedBox(width: 10),
+          IconButton(
+              onPressed: () {
+                AppCubit.get(context)
+                    .updateDataBase(status: 'done', id: model['id']);
+              },
+              icon: Icon(
+                Icons.check_box,
+                color: Colors.greenAccent,
+              )),
+          SizedBox(width: 10),
+          IconButton(
+              onPressed: () {
+                AppCubit.get(context)
+                    .updateDataBase(status: 'archive', id: model['id']);
+              },
+              icon: Icon(Icons.archive, color: Colors.grey))
         ],
       ),
     );
