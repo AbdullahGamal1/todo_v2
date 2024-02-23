@@ -10,15 +10,7 @@ class DoneTasks extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var tasks = AppCubit.get(context).doneTasks;
-        return ListView.separated(
-            itemBuilder: (context, index) =>
-                BuildTaskitem(tasks[index], context),
-            separatorBuilder: (context, index) => Container(
-                  width: double.infinity,
-                  height: 1,
-                  color: Colors.grey[300],
-                ),
-            itemCount: tasks.length);
+        return tasksBuilder(tasks: tasks);
       },
     );
   }
